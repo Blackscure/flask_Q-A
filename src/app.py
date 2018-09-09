@@ -1,9 +1,14 @@
 from flask import Flask, redirect, url_for, render_template, request
+ 
 app = Flask(__name__)
+ 
+ 
+
+
 
 
 @app.route('/')
-def hello():
+def home():
     createLink = "<a href='" + url_for('create') + "'>Create a question</a>"
     return "<html><head><title>Hello, World!</title></head><body> " + createLink + "</body></html>"
 
@@ -12,14 +17,15 @@ def create():
     if request.method == 'GET':
         return render_template('createquestion.html')
     elif request.method == 'POST':
-        title = request.form['title']
-        question = request.form['question']
-        answer = request.form['answer']
-        print(title,question,answer)
+        title = request.form['title'],
+        question = request.form['question'],
+        answer = request.form['answer'],
+         
+        
 
         
-        return redirect(url_for('createdquestion.html'))
-        #return redirect_urlfor('createdquestion.html', question = question)
+        return redirect(url_for('made.html', question=question))
+        
     else:
         return "<h2>Invalid request</h2>"
      
@@ -28,13 +34,15 @@ def create():
 def question(title):
     if request.method == 'GET':
 
-        question = 'ask here'
+        question = "ask me"
+
+
         return render_template("answerquestion.html", question=question)
     elif request.method == 'POST':
         submittedanswer = request.form['submittedAnswer']
 
 
-        answer = 'Answer'
+        answer = "answer me"
         if submittedanswer == answer:
             return render_template('correct.html')
         else:
